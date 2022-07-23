@@ -1,0 +1,33 @@
+.nav {
+    grid-area: nav;
+    background-color: #f4f5f7;
+    color: #898cb4;
+}
+
+.nav ul {
+    list-style: none;
+}
+
+.item a {
+    color: #a69aae;
+    text-decoration: none;
+}
+
+.item.active a {
+    color: #3d3c3e;
+}
+
+/* nav {
+    grid-area: nav;
+    background-color: #f4f5f7;
+    color: #898cb4;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav a {
+    color: #a69aae;
+    text-decoration: none;
+} */
