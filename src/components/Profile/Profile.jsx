@@ -1,4 +1,5 @@
 import classes from './Profile.module.css';
+import MyPosts from './MyPosts/MyPosts.jsx';
 
 const Profile = () => {
   return (
@@ -13,7 +14,7 @@ const Profile = () => {
       <div className={classes.mainInfo}>
         <div className={classes.avatar}>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDkvFCLSMbUU6Bqb1m-0y3LPAQ7_Gcs-PNZw&usqp=CAU"
+            src="http://c.files.bbci.co.uk/C870/production/_112921315_gettyimages-876284806.jpg"
             alt=""
           />
         </div>
@@ -25,15 +26,7 @@ const Profile = () => {
           <p>Website</p>
         </div>
       </div>
-
-      <div>
-        my posts
-        <div>New post</div>
-        <div className={classes.posts}>
-          <div className={classes.item}>post 1</div>
-          <div className={classes.item}>post 2</div>
-        </div>
-      </div>
+      <MyPosts />
     </div>
   );
 };
