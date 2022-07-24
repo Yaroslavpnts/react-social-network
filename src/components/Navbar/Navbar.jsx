@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className={classes.nav}>
       <ul>
         <li className={`${classes.item} ${classes.active}`}>
-          <a href="#">Profile</a>
+          <a href="">Profile</a>
         </li>
         <li className={classes.item}>
           <a href="#">Messages</a>

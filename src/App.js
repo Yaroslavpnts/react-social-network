@@ -3,9 +3,10 @@ import './App.css';
 import Header from './components/Header/Header.jsx';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile.jsx';
+import Dialogs from './components/Dialogs/Dialogs.jsx';
 
-// ÐšÐ°Ð¶Ð´Ñ‹Ð¹ Ñ€Ð°Ð· ÐºÐ¾Ð³Ð´Ð° Ð¼Ñ‹ Ð¾Ð±ÑŠÑÐ²Ð»ÑÐµÐ¼ ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ñƒ, Ð² Ñ€ÐµÐ°ÐºÑ‚Ðµ Ñƒ Ð½Ð°Ñ Ð¿Ð¾ÑÐ²Ð»ÑÐµÑ‚ÑÑ, Ð¼Ð¾Ð¶Ð½Ð¾ ÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ Ñ‡Ñ‚Ð¾ Ð½Ð¾Ð²Ñ‹Ð¹ Ñ‚ÑÐ³, Ð² Ð´Ð°Ð½Ð½Ð¾Ð¼ ÑÐ»ÑƒÑ‡Ð°Ðµ <App />
-// Ð˜ ÑÑ‚Ð¾Ñ‚ Ñ‚ÑÐ³ Ð¼Ð¾Ð¶Ð½Ð¾ ÐºÑƒÐ´Ð°-Ñ‚Ð¾ Ð²ÑÑ‚Ð°Ð²Ð¸Ñ‚ÑŒ Ð¸ Ð²ÑÐµ Ð·Ð°Ñ€Ð°Ð±Ð¾Ñ‚Ð°ÐµÑ‚
+// „K„p„w„t„„z „‚„p„x „{„€„s„t„p „}„ „€„q„Œ„‘„r„|„‘„u„} „{„€„}„„€„~„u„~„„„…, „r „‚„u„p„{„„„u „… „~„p„ƒ „„€„‘„r„|„‘„u„„„ƒ„‘, „}„€„w„~„€ „ƒ„‰„y„„„p„„„Ž „‰„„„€ „~„€„r„„z „„„„s, „r „t„p„~„~„€„} „ƒ„|„…„‰„p„u <App />
+// „I „„„„€„„ „„„„s „}„€„w„~„€ „{„…„t„p-„„„€ „r„ƒ„„„p„r„y„„„Ž „y „r„ƒ„u „x„p„‚„p„q„€„„„p„u„„
 // <App />
 
 function App() {
@@ -13,7 +14,10 @@ function App() {
     <div className="app-wrapper">
       <Header />
       <Navbar />
-      <Profile />
+      <div className="app-wrapper-content">
+        <Dialogs />
+        {/* <Profile /> */}
+      </div>
     </div>
   );
 }

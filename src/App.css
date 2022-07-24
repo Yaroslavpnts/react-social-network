@@ -15,6 +15,9 @@ p {
   gap: 10px;
 }
 
+.app-wrapper-content {
+  grid-area: content;
+}
 
 
 /* .App {
