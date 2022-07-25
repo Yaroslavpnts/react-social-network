@@ -26,17 +26,17 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li className={classes.item}>
-          <NavLink to="#" className={setStyle}>
+          <NavLink to="/ab" className={setStyle}>
             News
           </NavLink>
         </li>
         <li className={classes.item}>
-          <NavLink to="#" className={setStyle}>
+          <NavLink to="/cd" className={setStyle}>
             Music
           </NavLink>
         </li>
         <li className={classes.item}>
-          <NavLink to="#" className={setStyle}>
+          <NavLink to="/de" className={setStyle}>
             Settings
           </NavLink>
         </li>

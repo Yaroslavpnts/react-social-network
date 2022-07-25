@@ -6,10 +6,6 @@ import Profile from './components/Profile/Profile.jsx';
 import Dialogs from './components/Dialogs/Dialogs.jsx';
 import { Routes, Route } from 'react-router-dom';
 
-// „K„p„w„t„„z „‚„p„x „{„€„s„t„p „}„ „€„q„Œ„‘„r„|„‘„u„} „{„€„}„„€„~„u„~„„„…, „r „‚„u„p„{„„„u „… „~„p„ƒ „„€„‘„r„|„‘„u„„„ƒ„‘, „}„€„w„~„€ „ƒ„‰„y„„„p„„„ „‰„„„€ „~„€„r„„z „„„„s, „r „t„p„~„~„€„} „ƒ„|„…„‰„p„u <App />
-// „I „„„„€„„ „„„„s „}„€„w„~„€ „{„…„t„p-„„„€ „r„ƒ„„„p„r„y„„„ „y „r„ƒ„u „x„p„‚„p„q„€„„„p„u„„
-// <App />
-
 function App() {
   return (
     // <BrowserRouter>
