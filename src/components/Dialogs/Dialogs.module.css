@@ -15,6 +15,7 @@
     padding: 10px;
 }
 
-.messages .message {
-
+.createMessage {
+    width: 80%;
 }
+
