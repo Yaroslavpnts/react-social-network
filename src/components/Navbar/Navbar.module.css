@@ -2,13 +2,17 @@
     grid-area: nav;
     background-color: #f4f5f7;
     color: #898cb4;
-    padding: 20px;
+    padding: 10px;
 }
 
 .nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.nav .menu {
+    margin-bottom: 40px;
 }
 
 .item a {
@@ -24,17 +28,18 @@
     text-decoration: underline;
 }
 
-/* nav {
-    grid-area: nav;
-    background-color: #f4f5f7;
-    color: #898cb4;
+.friendsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-nav ul {
-    list-style: none;
+.friendsContainer span:first-child {
+    margin-bottom: 20px;
+    font-size: 18px;
 }
 
-nav a {
-    color: #a69aae;
-    text-decoration: none;
-} */
+.friendsList {
+    display: flex;
+    width: 100%;
+}

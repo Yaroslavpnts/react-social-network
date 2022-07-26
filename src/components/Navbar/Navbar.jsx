@@ -1,5 +1,6 @@
 import classes from './Navbar.module.css';
 import { NavLink } from 'react-router-dom';
+import Friend from './FriendItem/FriendItem';
 
 /*
   let classes = {
@@ -11,10 +12,10 @@ import { NavLink } from 'react-router-dom';
 
 const setStyle = ({ isActive }) => (isActive ? classes.active : '');
 
-const Navbar = () => {
+const Navbar = props => {
   return (
     <nav className={classes.nav}>
-      <ul>
+      <ul className={classes.menu}>
         <li className={classes.item}>
           <NavLink to="/profile" className={setStyle}>
             Profile
@@ -42,11 +43,14 @@ const Navbar = () => {
         </li>
       </ul>
 
-      <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+      <div className={classes.friendsContainer}>
+        <span>Friends</span>
+        <ul className={classes.friendsList}>
+          {props.state.friends.map(friend => (
+            <Friend key={friend.id} name={friend.name} photo={friend.photo} />
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };
