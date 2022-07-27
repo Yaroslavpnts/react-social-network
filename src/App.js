@@ -8,21 +8,34 @@ import { Routes, Route } from 'react-router-dom';
 
 function App(props) {
   return (
-    // <BrowserRouter>
     <div className="app-wrapper">
       <Header />
       <Navbar state={props.state.sidebar} />
       <div className="app-wrapper-content">
         <Routes>
-          <Route path="/dialogs/*" element={<Dialogs state={props.state.dialogsPage} />} />
+          <Route
+            path="/dialogs/*"
+            element={
+              <Dialogs
+                state={props.state.dialogsPage}
+                addMessage={props.addMessage}
+                updateNewMessageText={props.updateNewMessageText}
+              />
+            }
+          />
           <Route
             path="/profile"
-            element={<Profile state={props.state.profilePage} addPost={props.addPost} />}
+            element={
+              <Profile
+                profilePage={props.state.profilePage}
+                addPost={props.addPost}
+                updateNewPostText={props.updateNewPostText}
+              />
+            }
           />
         </Routes>
       </div>
     </div>
-    // </BrowserRouter>
   );
 }
 
