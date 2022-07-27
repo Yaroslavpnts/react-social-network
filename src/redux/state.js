@@ -1,4 +1,4 @@
-import { rerenderEntireTree } from '../render.js';
+let rerenderEntireTree;
 
 let state = {
   profilePage: {
@@ -66,19 +66,19 @@ export let addPost = () => {
   rerenderEntireTree(state);
 };
 
-export let updateNewPostText = newText => {
+export const updateNewPostText = newText => {
   state.profilePage.newPostText = newText;
   rerenderEntireTree(state);
 };
 
-export let updateNewMessageText = newText => {
+export const updateNewMessageText = newText => {
   state.dialogsPage.newMessageText = newText;
   rerenderEntireTree(state);
 };
 
-export let addMessage = () => {
+export const addMessage = () => {
   let newMessage = {
-    id: 6,
+    id: state.dialogsPage.messagesData.length + 1,
     message: state.dialogsPage.newMessageText,
   };
 
@@ -89,4 +89,10 @@ export let addMessage = () => {
   rerenderEntireTree(state);
 };
 
+export const subscribe = observer => {
+  rerenderEntireTree = observer; // паттерн observer
+};
+
 export default state;
+
+// Будем внедрять объект store (OOP)
