@@ -1,4 +1,7 @@
-// let rerenderEntireTree;
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let store = {
   _state: {
@@ -67,7 +70,7 @@ let store = {
   // этот объект описывает какое действение неоходимо совершить
   // у этого объекта обязательно должно быть свойство type: 'название действия'
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
+    if (action.type === ADD_POST) {
       let newPost = {
         id: 5,
         message: this._state.profilePage.newPostText,
@@ -79,15 +82,15 @@ let store = {
       this._state.profilePage.newPostText = '';
 
       this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+    } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.profilePage.newPostText = action.newText;
       this._callSubscriber(this._state);
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
       console.log(action.newText);
       console.log(action);
       this._state.dialogsPage.newMessageText = action.newText;
       this._callSubscriber(this._state);
-    } else if (action.type === 'ADD-MESSAGE') {
+    } else if (action.type === ADD_MESSAGE) {
       let newMessage = {
         id: this._state.dialogsPage.messagesData.length + 1,
         message: this._state.dialogsPage.newMessageText,
@@ -101,6 +104,24 @@ let store = {
     }
   },
 };
+
+export const addPostActionCreator = () => ({ type: ADD_POST });
+//   return ;
+// };
+
+export const updateNewPostTextActionCreator = text => ({
+  type: UPDATE_NEW_POST_TEXT,
+  newText: text,
+});
+//   return ;
+// };
+
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+
+export const updateNewMessageTextActionCreator = text => ({
+  type: UPDATE_NEW_MESSAGE_TEXT,
+  newText: text,
+});
 
 export default store;
 
