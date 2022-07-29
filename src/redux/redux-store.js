@@ -11,6 +11,10 @@ let reducers = combineReducers({
   sidebar: sidebarReducer,
 });
 
+console.log('redux-store-2');
+
 let store = createStore(reducers);
+
+console.log('redux-store-3');
 
 export default store;

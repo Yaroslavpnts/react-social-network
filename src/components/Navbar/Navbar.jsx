@@ -46,7 +46,7 @@ const Navbar = props => {
       <div className={classes.friendsContainer}>
         <span>Friends</span>
         <ul className={classes.friendsList}>
-          {props.state.friends.map(friend => (
+          {props.friends.map(friend => (
             <Friend key={friend.id} name={friend.name} photo={friend.photo} />
           ))}
         </ul>
