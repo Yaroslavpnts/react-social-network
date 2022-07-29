@@ -8,27 +8,26 @@ import {
 } from '../../redux/dialogs-reducer';
 
 const Dialogs = props => {
-  let state = props.store.getState().dialogsPage;
-
-  let dialogsElements = state.dialogsData.map(dialog => (
+  let dialogsElements = props.dialogsPage.dialogsData.map(dialog => (
     <DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />
   ));
 
-  let messagesElements = state.messagesData.map(message => (
+  let messagesElements = props.dialogsPage.messagesData.map(message => (
     <MessageItem key={message.id} id={message.id} message={message.message} />
   ));
 
   let newMessageText = React.createRef();
 
   let onClickCreacteMessage = () => {
-    props.store.dispatch(addMessageActionCreator());
+    props.sendMessage();
   };
 
   let onNewMassageChange = e => {
-    // let text = newMessageText.current.value;
     let body = e.target.value;
-    let action = updateNewMessageTextActionCreator(body);
-    props.store.dispatch(action);
+    // let action = updateNewMessageTextActionCreator(body);
+    // props.store.dispatch(action);
+
+    props.updateNewMessageBody(body);
   };
 
   return (
@@ -41,7 +40,7 @@ const Dialogs = props => {
             onChange={onNewMassageChange}
             className={classes.createMessage}
             ref={newMessageText}
-            value={state.newMessageText}
+            value={props.dialogsPage.newMessageText}
           ></textarea>
           <button onClick={onClickCreacteMessage}>Send</button>
         </div>

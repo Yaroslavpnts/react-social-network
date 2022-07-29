@@ -22,6 +22,7 @@ let initialState = {
 };
 
 const sidebarReducer = (state = initialState, action) => {
+  console.log('sidebar-reducer.js');
   return state;
 };
 
