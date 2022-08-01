@@ -12,7 +12,7 @@ let initialState = {
 };
 
 export const profileReducer = (state = initialState, action) => {
-  console.log('profile-reducer.js');
+  console.log(action, state);
   switch (action.type) {
     case ADD_POST:
       let newPost = {

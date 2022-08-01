@@ -8,17 +8,10 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import StoreContext from './StoreContex';
 
 function App(props) {
-  console.log('app.js');
   return (
     <div className="app-wrapper">
       <Header />
-      <StoreContext.Consumer>
-        {store => {
-          let state = store.getState();
-          return <Navbar friends={state.sidebar.friends} />;
-        }}
-      </StoreContext.Consumer>
-
+      <Navbar />;
       <div className="app-wrapper-content">
         <Routes>
           <Route path="/dialogs/*" element={<DialogsContainer />} />

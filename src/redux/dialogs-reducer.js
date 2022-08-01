@@ -21,8 +21,6 @@ let initialState = {
 };
 
 export const dialogsReducer = (state = initialState, action) => {
-  console.log('dialogs-reducer.js');
-
   switch (action.type) {
     case UPDATE_NEW_MESSAGE_BODY:
       state.newMessageText = action.body;

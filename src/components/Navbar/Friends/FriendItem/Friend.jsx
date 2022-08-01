@@ -1,4 +1,4 @@
-import classes from './FriendItem.module.css';
+import classes from './Friend.module.css';
 
 const Friend = props => {
   return (
