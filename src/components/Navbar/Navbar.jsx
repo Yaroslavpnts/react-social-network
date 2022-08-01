@@ -41,6 +41,11 @@ const Navbar = props => {
             Settings
           </NavLink>
         </li>
+        <li className={classes.item}>
+          <NavLink to="/users" className={setStyle}>
+            Find Users
+          </NavLink>
+        </li>
       </ul>
 
       <FriendsContainer />

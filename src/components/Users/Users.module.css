@@ -1,0 +1,45 @@
+.user {
+    display: flex;
+}
+
+.photo {
+    margin-right: 30px;
+}
+
+.imgWrapper {
+    width: 70px;
+    height: 70px;
+
+}
+
+.photo img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.photo button {
+    width: 70px;
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    border: 1px solid black;
+    border-radius: 13px;
+    margin-bottom: 15px;
+    padding: 8px;
+}
+
+.intro {
+    /* width: 90%; */
+}
+
+.location {
+    /* width: 10%; */
+}
+.location span {
+    display: block;
+}
+
