@@ -1,4 +1,4 @@
-import Friend from './FriendItem/Friend';
+import Friends from './Friends';
 import { connect } from 'react-redux';
 
 // const Friends = props => {
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    friend: state.sidebar.friends,
+    friends: state.sidebar.friends,
   };
 };
 
@@ -24,6 +24,6 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 
-const friendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friend);
+const friendsContainer = connect(mapStateToProps, mapDispatchToProps)(Friends);
 
 export default friendsContainer;

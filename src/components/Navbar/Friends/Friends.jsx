@@ -1,7 +1,8 @@
-import classes from './FriendItem.module.css';
+import classes from './Friends.module.css';
 import Friend from './FriendItem/Friend';
 
 const Friends = props => {
+  console.log(props);
   return (
     <div className={classes.friendsContainer}>
       <span>Friends</span>
