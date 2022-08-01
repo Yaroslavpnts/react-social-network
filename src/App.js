@@ -5,7 +5,6 @@ import Navbar from './components/Navbar/Navbar.jsx';
 import Profile from './components/Profile/Profile.jsx';
 import { Routes, Route } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import StoreContext from './StoreContex';
 
 function App(props) {
   return (

@@ -23,11 +23,10 @@ let initialState = {
 export const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_NEW_MESSAGE_BODY: {
-      let stateCopy = { ...state };
-
-      stateCopy.newMessageText = action.body;
-
-      return stateCopy;
+      return {
+        ...state,
+        newMessageText: action.body,
+      };
     }
 
     case ADD_MESSAGE: {
@@ -36,13 +35,12 @@ export const dialogsReducer = (state = initialState, action) => {
         message: state.newMessageText,
       };
 
-      let stateCopy = { ...state };
+      let stateCopy = {
+        ...state,
+        messagesData: [...state.messagesData, newMessage],
+        newMessageText: '',
+      };
 
-      stateCopy.messagesData = [...state.messagesData];
-
-      stateCopy.messagesData.push(newMessage);
-
-      stateCopy.newMessageText = '';
       return stateCopy;
     }
 
