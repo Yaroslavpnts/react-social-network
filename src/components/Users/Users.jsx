@@ -3,15 +3,35 @@ import axios from 'axios';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 import React from 'react';
+import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers';
 
 class Users extends React.Component {
   componentDidMount() {
     // alert('I know I am inside the DOM');
 
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      this.props.setUsers(response.data.items);
-    });
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
+      )
+      .then(response => {
+        this.props.setUsers(response.data.items);
+        this.props.setUsersTotalCount(response.data.totalCount);
+      });
   }
+
+  onPageChanged = pageNumber => {
+    this.props.setCurrentPage(pageNumber);
+    axios
+      .get(
+        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
+      )
+      .then(response => {
+        this.props.setUsers(response.data.items);
+      });
+
+    //тут в Get-параметре "page" беру номер страницы который пришел сюда с onClick, т.к. на момент когда этот запрос будет выполняться
+    //this.props.currentPage будет ссылаться еще на прошлую страницу
+  };
 
   componentDidUpdate() {
     // alert('I know I am updated in the DOM');
@@ -22,8 +42,30 @@ class Users extends React.Component {
   }
 
   render() {
+    let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+
+    let pages = [];
+
+    for (let i = 1; i <= pagesCount; i += 1) {
+      pages.push(i);
+    }
+
     return (
       <div>
+        <div className={classes.pages}>
+          {pages.map(p => {
+            return (
+              <span
+                onClick={e => {
+                  this.onPageChanged(p);
+                }}
+                className={this.props.currentPage === p ? classes.selectedPage : ''}
+              >
+                {p}
+              </span>
+            );
+          })}
+        </div>
         {this.props.users.map(u => (
           <div key={u.id} className={classes.user}>
             <div className={classes.photo}>
