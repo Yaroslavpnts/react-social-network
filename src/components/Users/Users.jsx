@@ -1,5 +1,5 @@
 // import * as axios from 'axios';
-importn axios from 'axios';
+import axios from 'axios';
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
 
