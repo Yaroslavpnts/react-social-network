@@ -5,14 +5,20 @@ import userPhoto from '../../assets/images/user.png';
 import React from 'react';
 
 class Users extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    // alert('I know I am inside the DOM');
 
     axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
       this.props.setUsers(response.data.items);
     });
+  }
 
-    console.log(this.props.users);
+  componentDidUpdate() {
+    // alert('I know I am updated in the DOM');
+  }
+
+  componentWillUnmount() {
+    // alert('I know i am going to be destoyed');
   }
 
   render() {
