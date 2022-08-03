@@ -17,7 +17,7 @@ const Navbar = props => {
     <nav className={classes.nav}>
       <ul className={classes.menu}>
         <li className={classes.item}>
-          <NavLink to="/profile" className={setStyle}>
+          <NavLink to="/profile/*" className={setStyle}>
             Profile
           </NavLink>
         </li>

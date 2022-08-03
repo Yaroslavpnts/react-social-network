@@ -1,6 +1,12 @@
 import classes from './ProfileInfo.module.css';
+import userPhoto from '../../../assets/images/user.png';
+import Preloader from '../../common/preloader/Preloader';
 
-const ProfileInfo = () => {
+const ProfileInfo = props => {
+  if (!props.profile) {
+    return <Preloader />;
+  }
+
   return (
     <div>
       <div className={classes.mainImg}>
@@ -12,13 +18,10 @@ const ProfileInfo = () => {
 
       <div className={classes.descriptionBlock}>
         <div className={classes.avatar}>
-          <img
-            src="http://c.files.bbci.co.uk/C870/production/_112921315_gettyimages-876284806.jpg"
-            alt=""
-          />
+          <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} alt="" />
         </div>
         <div className={classes.aboutMe}>
-          <h3>Name</h3>
+          <h3>{props.profile.fullName}</h3>
           <p>Birthday</p>
           <p>Cty</p>
           <p>Education</p>
