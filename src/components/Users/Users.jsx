@@ -1,27 +1,26 @@
 import classes from './Users.module.css';
 import userPhoto from '../../assets/images/user.png';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import axios from 'axios';
+import { followAPI } from '../../api/follow/follow-api';
 
 const Users = props => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
   let pages = [];
 
-  for (let i = 1; i <= pagesCount; i += 1) {
-    pages.push(i);
-  }
-
-  let newPages;
-
   if (props.currentPage <= 5) {
-    newPages = pages.slice(0, 10);
+    for (let i = 1; i <= 10; i += 1) {
+      pages.push(i);
+    }
   } else {
-    newPages = pages.slice(props.currentPage - 5, props.currentPage + 5);
+    for (let i = props.currentPage - 5; i < props.currentPage + 5; i += 1) {
+      pages.push(i);
+    }
   }
 
   return (
     <div>
       <div className={classes.pages}>
-        {newPages.map(p => {
+        {pages.map(p => {
           return (
             <span
               onClick={e => {
@@ -38,27 +37,55 @@ const Users = props => {
       {props.users.map(u => (
         <div key={u.id} className={classes.user}>
           <div className={classes.photo}>
-            <NavLink to={`/profile/${u.id}`}>
+            <Link to={`/profile/${u.id}`}>
               <div className={classes.imgWrapper}>
                 <img src={u.photos.small ? u.photos.small : userPhoto} alt="avatar"></img>
               </div>
-            </NavLink>
+            </Link>
             <div>
               {u.followed ? (
                 <button
                   onClick={() => {
-                    props.unfollow(u.id);
+                    followAPI.unfollow(u.id, props.unfollow);
+                    // axios
+                    //   .delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                    //     withCredentials: true,
+                    //     headers: {
+                    //       'API-KEY': 'ad530900-a7de-469c-834c-3dfb49ba381e',
+                    //     },
+                    //   })
+                    //   .then(response => {
+                    //     if (response.data.resultCode === 0) {
+                    //       props.unfollow(u.id);
+                    //     }
+                    //   });
                   }}
                 >
-                  Follow
+                  unfollow
                 </button>
               ) : (
                 <button
                   onClick={() => {
-                    props.follow(u.id);
+                    followAPI.follow(u.id, props.follow);
+                    // axios
+                    //   .post(
+                    //     `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                    //     {},
+                    //     {
+                    //       withCredentials: true,
+                    //       headers: {
+                    //         'API-KEY': 'ad530900-a7de-469c-834c-3dfb49ba381e',
+                    //       },
+                    //     }
+                    //   )
+                    //   .then(response => {
+                    //     if (response.data.resultCode === 0) {
+                    //       props.follow(u.id);
+                    //     }
+                    //   });
                   }}
                 >
-                  Unfollow
+                  follow
                 </button>
               )}
             </div>
