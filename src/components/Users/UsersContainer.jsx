@@ -1,37 +1,24 @@
 import { connect } from 'react-redux';
-import {
-  follow,
-  unfollow,
-  setUsers,
-  setCurrentPage,
-  setUsersTotalCount,
-  toggleIsFetching,
-} from '../../redux/users-reducer';
+import { getUsers, follow, unfollow } from '../../redux/users-reducer';
 import Users from './Users';
 import React from 'react';
 import Preloader from '../common/preloader/Preloader';
-import { usersAPI } from '../../api/users/users-api';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
     // alert('I know I am inside the DOM');
-
-    this.props.toggleIsFetching(true);
-
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-      this.props.setUsersTotalCount(data.totalCount);
-    });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   onPageChanged = pageNumber => {
-    this.props.setCurrentPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-      this.props.toggleIsFetching(false);
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsers(pageNumber, this.props.pageSize);
+
+    // this.props.setCurrentPage(pageNumber);       ????????????????????
+    // this.props.toggleIsFetching(true);
+    // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+    //   this.props.toggleIsFetching(false);
+    //   this.props.setUsers(data.items);
+    // });
   };
 
   componentDidUpdate() {
@@ -55,6 +42,7 @@ class UsersContainer extends React.Component {
           follow={this.props.follow}
           unfollow={this.props.unfollow}
           isFetching={this.props.isFetching}
+          followingInProgress={this.props.followingInProgress}
         />
       </>
     );
@@ -68,6 +56,7 @@ const mapStateToProps = state => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingInProgress: state.usersPage.followingInProgress,
   };
 };
 
@@ -91,14 +80,20 @@ const mapStateToProps = state => {
 //     toggleIsFetching: isFetching => {
 //       dispatch(toggleIsFetchingAC(isFetching));
 //     },
+
+//     getUsers: (currentPage, pageSize) => {
+//       dispatch(getUsers(currentPage, pageSize));
+//     },
 //   };
 // };
 
+//Диспатчим вызов этих функций
 export default connect(mapStateToProps, {
+  // followSuccess,
+  // unfollowSuccess,
+  // setCurrentPage,
+  // toggleFollowingProgress,
+  getUsers,
   follow,
   unfollow,
-  setUsers,
-  setCurrentPage,
-  setUsersTotalCount,
-  toggleIsFetching,
 })(UsersContainer);
