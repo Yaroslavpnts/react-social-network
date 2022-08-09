@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import MessageItem from './MessageItem/MessageItem';
+import { Navigate } from 'react-router-dom';
 
 const Dialogs = props => {
   let dialogsElements = props.dialogsPage.dialogsData.map(dialog => (
@@ -25,6 +26,8 @@ const Dialogs = props => {
 
     props.updateNewMessageBody(body);
   };
+
+  if (!props.isAuth) return <Navigate to="/login" />;
 
   return (
     <div className={classes.dialogs}>
