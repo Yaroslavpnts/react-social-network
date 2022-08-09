@@ -3,7 +3,8 @@ import React from 'react';
 import Profile from './Profile.jsx';
 import { connect } from 'react-redux';
 import { getUserProfile } from '../../redux/profile-reducer';
-import { useLocation, useNavigate, useParams, Navigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { withAuthRedirect } from '../hoc/withAuthRedirect.js';
 
 /* Пока не учил хуки, сделаю функцию обертку, т.к. наша контейнерная компонента ProfileContainer - классовая компонента, то 
    мы не можем использовать хуки в классовых компонентах. Решение с офф документации - создать функцию обертку, которая по принципу
@@ -28,8 +29,6 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.isAuth) return <Navigate to="/login" />;
-
     return (
       <div>
         <Profile {...this.props} />
@@ -38,11 +37,12 @@ class ProfileContainer extends React.Component {
   }
 }
 
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
 const mapStateToProps = state => {
   return {
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth,
   };
 };
 
-export default connect(mapStateToProps, { getUserProfile })(withRouter(ProfileContainer));
+export default connect(mapStateToProps, { getUserProfile })(withRouter(AuthRedirectComponent));

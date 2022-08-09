@@ -5,6 +5,8 @@ import {
 import Dialogs from './Dialogs';
 // import StoreContext from '../../StoreContex';
 import { connect } from 'react-redux/es/exports';
+// import { Navigate } from 'react-router-dom';
+import { withAuthRedirect } from '../hoc/withAuthRedirect';
 
 // const DialogsContainer1 = props => {
 //   return (
@@ -36,7 +38,6 @@ import { connect } from 'react-redux/es/exports';
 const mapStateToProps = state => {
   return {
     dialogsPage: state.dialogsPage,
-    isAuth: state.auth.isAuth,
   };
 };
 
@@ -52,6 +53,8 @@ const mapStateToDispatch = dispatch => {
   };
 };
 
-const DialogsContainer = connect(mapStateToProps, mapStateToDispatch)(Dialogs);
+let AuthRedirectComponent = withAuthRedirect(Dialogs);
+
+const DialogsContainer = connect(mapStateToProps, mapStateToDispatch)(AuthRedirectComponent);
 
 export default DialogsContainer;
