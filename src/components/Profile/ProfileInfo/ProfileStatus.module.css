@@ -1,0 +1,15 @@
+span {
+    display: block;
+}
+
+input {
+    display: none;
+}
+
+span.editMode {
+    display: none;
+}
+
+input.editMode {
+    display: block;
+}
