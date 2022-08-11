@@ -55,7 +55,7 @@ export const getAuthUserData = () => {
         if (response.data.resultCode === 0) {
           const { id, login, email } = response.data.data;
           dispatch(setAuthUserData(id, login, email));
-          profileAPI.getUser(id).then(response => {
+          profileAPI.getProfile(id).then(response => {
             dispatch(setCurrentUser(response.data));
           });
         }

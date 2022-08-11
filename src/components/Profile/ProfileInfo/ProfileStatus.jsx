@@ -2,39 +2,49 @@ import React from 'react';
 import classes from './ProfileStatus.module.css';
 
 class ProfileStatus extends React.Component {
+  inputStatusRef = React.createRef();
+
   state = {
     editMode: false,
+    status: this.props.status,
   };
 
-  activateEditMode() {
+  activateEditMode = () => {
     //метод setState асинхронен
     this.setState(
       {
         editMode: true,
       },
-      () => this.inputStatus.current.focus()
+      () => {
+        this.inputStatusRef.current.focus();
+        this.inputStatusRef.current.select();
+      }
     );
-  }
+  };
 
   deactivateEditMode() {
     this.setState({
       editMode: false,
     });
+    this.props.updateStatus(this.state.status);
   }
 
-  inputStatus = React.createRef();
+  onStatusChange(e) {
+    this.setState({
+      status: e.currentTarget.value,
+    });
+  }
 
   render() {
-    console.log(2);
     return (
-      <div>
+      <div className={classes.profileStatus}>
         {/* {!this.state.editMode && ( */}
         <div>
           <span
             className={this.state.editMode ? classes.editMode : ''}
-            onDoubleClick={this.activateEditMode.bind(this)}
+            onDoubleClick={this.activateEditMode}
           >
-            {this.props.status}
+            {this.props.status || '------'}
           </span>
         </div>
         {/* )} */}
@@ -42,10 +52,11 @@ class ProfileStatus extends React.Component {
         <div>
           <input
             // autoFocus
+            onChange={this.onStatusChange.bind(this)}
             className={this.state.editMode ? classes.editMode : ''}
-            ref={this.inputStatus}
+            ref={this.inputStatusRef}
             onBlur={this.deactivateEditMode.bind(this)}
-            value={this.props.status}
+            value={this.state.status}
           />
         </div>
         {/* )} */}

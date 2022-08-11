@@ -1,7 +1,13 @@
 import axiosInstance from '../api-instance';
 
 export const profileAPI = {
-  getUser(id) {
-    return axiosInstance.get(`profile/${id}`);
+  getProfile(userId) {
+    return axiosInstance.get(`profile/${userId}`);
+  },
+  getStatus(userId) {
+    return axiosInstance.get(`profile/status/${userId}`);
+  },
+  updateStatus(status) {
+    return axiosInstance.put(`profile/status`, { status });
   },
 };

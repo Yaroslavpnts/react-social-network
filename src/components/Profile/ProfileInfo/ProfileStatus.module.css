@@ -1,15 +1,15 @@
-span {
+.profileStatus span {
     display: block;
 }
 
-input {
+.profileStatus input {
     display: none;
 }
 
-span.editMode {
+.profileStatus span.editMode {
     display: none;
 }
 
-input.editMode {
+.profileStatus input.editMode {
     display: block;
 }
