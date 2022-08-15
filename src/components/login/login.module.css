@@ -1,0 +1,13 @@
+h1 {
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+input {
+    border-radius: 4px;
+}
+
+input.error {
+    border: 2px solid red;
+}

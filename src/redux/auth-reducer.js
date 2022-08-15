@@ -3,6 +3,7 @@ import { profileAPI } from '../api/profile/profile-api';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
+const LOG_IN = 'LOG_IN';
 
 let initialState = {
   userId: null,
@@ -28,6 +29,12 @@ const authReducer = (state = initialState, action) => {
         currentUser: action.user,
       };
 
+    case LOG_IN:
+      return {
+        ...state,
+        userId: action.userId,
+      };
+
     default:
       return state;
   }
@@ -47,6 +54,11 @@ export const setCurrentUser = user => ({
   user,
 });
 
+export const logInApp = userId => ({
+  type: LOG_IN,
+  userId,
+});
+
 export const getAuthUserData = () => {
   return dispatch => {
     authAPI
@@ -61,6 +73,17 @@ export const getAuthUserData = () => {
         }
       })
       .catch(err => console.log(err));
+  };
+};
+
+export const logIn = data => {
+  return dispatch => {
+    authAPI.logIn(data).then(response => {
+      console.log(response);
+      if (response.data.resultCode === 0) {
+        dispatch(logInApp(response.data.data.userId));
+      }
+    });
   };
 };
 
