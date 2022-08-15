@@ -3,15 +3,21 @@ import { profileAPI } from '../api/profile/profile-api';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CURRENT_USER = 'SET_CURRENT_USER';
-const LOG_IN = 'LOG_IN';
+const SHOW_CAPTCHA = 'SHOW_CAPTCHA';
+
+const STATUS_SUCCESS = 0;
+const STATUS_ERROR = 1;
+const STATUS_CAPTCHA = 10;
 
 let initialState = {
   userId: null,
-  email: null,
   login: null,
-  isFetching: false,
+  email: null,
   isAuth: false,
+  // rememberMe: false,
+  // isFetching: false,
   currentUser: null,
+  captcha: '',
 };
 
 const authReducer = (state = initialState, action) => {
@@ -19,8 +25,7 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.data,
-        isAuth: true,
+        ...action.payload,
       };
 
     case SET_CURRENT_USER:
@@ -29,10 +34,10 @@ const authReducer = (state = initialState, action) => {
         currentUser: action.user,
       };
 
-    case LOG_IN:
+    case SHOW_CAPTCHA:
       return {
         ...state,
-        userId: action.userId,
+        captcha: action.url,
       };
 
     default:
@@ -40,12 +45,13 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export const setAuthUserData = (userId, email, login) => ({
+export const setAuthUserData = (userId, login, email, isAuth) => ({
   type: SET_USER_DATA,
-  data: {
+  payload: {
     userId,
-    email,
     login,
+    email,
+    isAuth,
   },
 });
 
@@ -54,9 +60,9 @@ export const setCurrentUser = user => ({
   user,
 });
 
-export const logInApp = userId => ({
-  type: LOG_IN,
-  userId,
+export const showCaptcha = url => ({
+  type: SHOW_CAPTCHA,
+  url,
 });
 
 export const getAuthUserData = () => {
@@ -64,10 +70,11 @@ export const getAuthUserData = () => {
     authAPI
       .authMe()
       .then(response => {
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === STATUS_SUCCESS) {
           const { id, login, email } = response.data.data;
-          dispatch(setAuthUserData(id, login, email));
+          dispatch(setAuthUserData(id, login, email, true));
           profileAPI.getProfile(id).then(response => {
+            console.log(response);
             dispatch(setCurrentUser(response.data));
           });
         }
@@ -76,12 +83,29 @@ export const getAuthUserData = () => {
   };
 };
 
-export const logIn = data => {
+export const logIn = (data, setStatus) => {
+  console.log(data);
   return dispatch => {
     authAPI.logIn(data).then(response => {
-      console.log(response);
-      if (response.data.resultCode === 0) {
-        dispatch(logInApp(response.data.data.userId));
+      console.log(response.data);
+      if (response.data.resultCode === STATUS_SUCCESS) {
+        dispatch(getAuthUserData());
+      } else if (response.data.resultCode === STATUS_CAPTCHA) {
+        authAPI.security().then(response => {
+          dispatch(showCaptcha(response.data.url));
+        });
+      } else {
+        setStatus(response.data.messages);
+      }
+    });
+  };
+};
+
+export const logOut = () => {
+  return dispatch => {
+    authAPI.logOut().then(response => {
+      if (response.data.resultCode === STATUS_SUCCESS) {
+        dispatch(setAuthUserData(null, null, null, false));
       }
     });
   };

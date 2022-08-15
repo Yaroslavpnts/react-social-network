@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from './login.module.css';
 import { Formik } from 'formik';
-import * as yup from 'yup';
-import requiredField from '../utilities/validators';
+// import requiredField from '../utilities/validators';
+import { Navigate } from 'react-router-dom';
 import validationSchema from '../utilities/validationSchema';
 import { FormControls } from '../common/FormsControls/FormsControls';
 
@@ -26,6 +26,8 @@ import { FormControls } from '../common/FormsControls/FormsControls';
 */
 
 const Login = props => {
+  if (props.isAuth) return <Navigate to={`/profile/${props.userId}`} />;
+
   return (
     <div>
       <h1>Login</h1>
@@ -34,17 +36,28 @@ const Login = props => {
           email: '',
           password: '',
           rememberMe: false,
+          captcha: '',
         }}
         // validateOnBlur={true}  - по умолчанию
         // validateOnChange={true} - по умолчанию
-        onSubmit={(values, { resetForm }) => {
-          props.logIn(values);
+        onSubmit={(values, { resetForm, setStatus }) => {
+          props.logIn(values, setStatus);
           resetForm();
         }}
-        validationSchema={validationSchema(10, 5)}
+        validationSchema={validationSchema(30, 5)}
         // validate={requiredField}
       >
-        {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => {
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          isValid,
+          handleSubmit,
+          dirty,
+          status,
+        }) => {
           return (
             <form>
               <div>
@@ -86,11 +99,29 @@ const Login = props => {
                 ></input>{' '}
                 Remember me
               </div>
+              {props.captcha && (
+                <div className={classes.captchaBlock}>
+                  <div>
+                    <input
+                      type="text"
+                      name="captcha"
+                      value={values.captcha}
+                      placeholder="captcha"
+                      onChange={handleChange}
+                      // onBlur={handleBlur}
+                    ></input>
+                  </div>
+                  <div>
+                    <img src={props.captcha} alt="captcha"></img>
+                  </div>
+                </div>
+              )}
               <div>
                 <button disabled={!isValid && !dirty} onClick={handleSubmit} type={'submit'}>
                   Log in
                 </button>
               </div>
+              <div>{status}</div>
             </form>
           );
         }}

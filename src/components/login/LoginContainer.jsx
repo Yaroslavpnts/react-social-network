@@ -5,6 +5,8 @@ import { logIn } from '../../redux/auth-reducer';
 
 const mapStateToProps = state => {
   return {
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha,
     userId: state.auth.userId,
   };
 };

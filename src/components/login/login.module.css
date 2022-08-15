@@ -11,3 +11,7 @@ input {
 input.error {
     border: 2px solid red;
 }
+
+.captchaBlock {
+    padding: 10px 0;
+}
