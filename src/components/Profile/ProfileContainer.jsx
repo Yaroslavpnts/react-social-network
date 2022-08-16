@@ -37,7 +37,8 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    if (!this.props.isAuth && !this.props.authorizedUserId) return <Navigate to="/login" />;
+    // console.log('rerendered');
+
     return (
       <div>
         <Profile
@@ -54,6 +55,7 @@ class ProfileContainer extends React.Component {
 // let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 const mapStateToProps = state => {
+  // console.log('mapStateToProps PROFILE');
   return {
     profile: state.profilePage.profile,
     status: state.profilePage.status,

@@ -43,7 +43,6 @@ const MyPosts = props => {
         }}
       >
         {({ values, handleChange, handleSubmit, setValues }) => {
-          console.log('rerendered');
           return (
             <form>
               <div className={classes.createPost}>
