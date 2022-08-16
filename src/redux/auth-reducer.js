@@ -67,7 +67,7 @@ export const showCaptcha = url => ({
 
 export const getAuthUserData = () => {
   return dispatch => {
-    authAPI
+    return authAPI
       .authMe()
       .then(response => {
         if (response.data.resultCode === STATUS_SUCCESS) {
@@ -84,7 +84,6 @@ export const getAuthUserData = () => {
 };
 
 export const logIn = (data, setStatus) => {
-  console.log(data);
   return dispatch => {
     authAPI.logIn(data).then(response => {
       console.log(response.data);

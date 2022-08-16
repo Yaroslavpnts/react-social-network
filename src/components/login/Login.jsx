@@ -40,9 +40,10 @@ const Login = props => {
         }}
         // validateOnBlur={true}  - по умолчанию
         // validateOnChange={true} - по умолчанию
-        onSubmit={(values, { resetForm, setStatus }) => {
+        onSubmit={(values, { resetForm, setStatus, setSubmitting }) => {
           props.logIn(values, setStatus);
           resetForm();
+          setSubmitting(false);
         }}
         validationSchema={validationSchema(30, 5)}
         // validate={requiredField}
@@ -80,7 +81,7 @@ const Login = props => {
                   <label htmlFor="password">Password</label>
                 </div>
                 <input
-                  type="text"
+                  type="password"
                   id="password"
                   name="password"
                   onChange={handleChange}
