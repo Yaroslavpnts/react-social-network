@@ -4,7 +4,7 @@ import {
 } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 // import StoreContext from '../../StoreContex';
-import { connect } from 'react-redux/es/exports';
+import { connect } from 'react-redux';
 // import { Navigate } from 'react-router-dom';
 import { withAuthRedirect } from '../hoc/withAuthRedirect';
 import { compose } from 'redux';
