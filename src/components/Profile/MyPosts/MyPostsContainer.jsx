@@ -35,7 +35,7 @@ import { connect } from 'react-redux/es/exports';
 
 const mapStateToProps = state => {
   return {
-    profilePage: state.profilePage,
+    posts: state.profilePage.postsData,
   };
 };
 
