@@ -1,5 +1,5 @@
 // import MyPosts from './MyPosts/MyPosts.jsx';
-import React, { useEffect } from 'react';
+import React from 'react';
 import Profile from './Profile.jsx';
 import { connect } from 'react-redux';
 import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/profile-reducer';
