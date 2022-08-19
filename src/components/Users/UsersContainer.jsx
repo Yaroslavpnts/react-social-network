@@ -17,11 +17,13 @@ import {
 class UsersContainer extends React.Component {
   componentDidMount() {
     // alert('I know I am inside the DOM');
-    this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+    const { currentPage, pageSize } = this.props;
+    this.props.requestUsers(currentPage, pageSize);
   }
 
   onPageChanged = pageNumber => {
-    this.props.requestUsers(pageNumber, this.props.pageSize);
+    const { pageSize } = this.props;
+    this.props.requestUsers(pageNumber, pageSize);
 
     // this.props.setCurrentPage(pageNumber);       ????????????????????
     // this.props.toggleIsFetching(true);

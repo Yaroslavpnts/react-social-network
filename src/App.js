@@ -1,16 +1,17 @@
 // import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/login/LoginContainer';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/preloader/Preloader';
+import store from './redux/redux-store.js';
 
 // function App(props) {
 //   return (
@@ -70,4 +71,18 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { initializeApp })(App);
+const AppContainer = connect(mapStateToProps, { initializeApp })(App);
+
+const SocialNetworkApp = props => {
+  return (
+    <React.StrictMode>
+      <BrowserRouter>
+        <Provider store={store}>
+          <AppContainer />
+        </Provider>
+      </BrowserRouter>
+    </React.StrictMode>
+  );
+};
+
+export default SocialNetworkApp;

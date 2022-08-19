@@ -1,6 +1,7 @@
 import classes from './MyPosts.module.css';
 import Post from './PostItem/Post.jsx';
-import React, { PureComponent } from 'react';
+import React from // { PureComponent }
+'react';
 import { Formik } from 'formik';
 
 const MyPosts = React.memo(props => {

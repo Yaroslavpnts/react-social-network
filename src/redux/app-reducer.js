@@ -24,12 +24,10 @@ export const initializedSuccess = () => ({
 });
 
 export const initializeApp = () => {
-  return dispatch => {
-    let promise = dispatch(getAuthUserData());
+  return async dispatch => {
+    await dispatch(getAuthUserData());
 
-    promise.then(() => {
-      dispatch(initializedSuccess());
-    });
+    dispatch(initializedSuccess());
   };
 };
 

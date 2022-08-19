@@ -3,7 +3,7 @@ import classes from './login.module.css';
 import { Formik } from 'formik';
 // import requiredField from '../utilities/validators';
 import { Navigate } from 'react-router-dom';
-import validationSchema from '../utilities/validationSchema';
+import validationSchema from '../utilities/validators/validationSchema';
 import { FormControls } from '../common/FormsControls/FormsControls';
 
 /*
@@ -25,8 +25,8 @@ import { FormControls } from '../common/FormsControls/FormsControls';
   эта функция должна вернуть какой-то jsx
 */
 
-const Login = props => {
-  if (props.isAuth) return <Navigate to={`/profile/${props.userId}`} />;
+const Login = ({ isAuth, userId, logIn, captcha }) => {
+  if (isAuth) return <Navigate to={`/profile/${userId}`} />;
 
   return (
     <div>
@@ -41,7 +41,7 @@ const Login = props => {
         // validateOnBlur={true}  - по умолчанию
         // validateOnChange={true} - по умолчанию
         onSubmit={(values, { resetForm, setStatus, setSubmitting }) => {
-          props.logIn(values, setStatus);
+          logIn(values, setStatus);
           resetForm();
           setSubmitting(false);
         }}
@@ -100,7 +100,7 @@ const Login = props => {
                 ></input>{' '}
                 Remember me
               </div>
-              {props.captcha && (
+              {captcha && (
                 <div className={classes.captchaBlock}>
                   <div>
                     <input
@@ -113,7 +113,7 @@ const Login = props => {
                     ></input>
                   </div>
                   <div>
-                    <img src={props.captcha} alt="captcha"></img>
+                    <img src={captcha} alt="captcha"></img>
                   </div>
                 </div>
               )}
