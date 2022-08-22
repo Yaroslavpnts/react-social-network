@@ -1,17 +1,19 @@
 // import logo from './logo.svg';
 import './App.css';
+import React, { Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/login/LoginContainer';
-import React from 'react';
 import { connect, Provider } from 'react-redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/preloader/Preloader';
 import store from './redux/redux-store.js';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+// import ProfileContainer from './components/Profile/ProfileContainer';
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 // function App(props) {
 //   return (
@@ -52,13 +54,15 @@ class App extends React.Component {
         <HeaderContainer />
         <Navbar />;
         <div className="app-wrapper-content">
-          <Routes>
-            <Route path="/dialogs/*" element={<DialogsContainer />} />
-            <Route path="/profile/:userId" element={<ProfileContainer />} />
-            <Route path="/profile/*" element={<ProfileContainer />} />
-            <Route path="/users" element={<UsersContainer />} />
-            <Route path="/login" element={<LoginContainer />} />
-          </Routes>
+          <Suspense fallback={<Preloader />}>
+            <Routes>
+              <Route path="/dialogs/*" element={<DialogsContainer />} />
+              <Route path="/profile/:userId" element={<ProfileContainer />} />
+              <Route path="/profile/*" element={<ProfileContainer />} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/login" element={<LoginContainer />} />
+            </Routes>
+          </Suspense>
         </div>
       </div>
     );
