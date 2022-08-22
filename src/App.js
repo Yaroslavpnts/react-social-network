@@ -79,13 +79,13 @@ const AppContainer = connect(mapStateToProps, { initializeApp })(App);
 
 const SocialNetworkApp = props => {
   return (
-    <React.StrictMode>
-      <BrowserRouter>
-        <Provider store={store}>
-          <AppContainer />
-        </Provider>
-      </BrowserRouter>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    </BrowserRouter>
+    // </React.StrictMode>
   );
 };
 

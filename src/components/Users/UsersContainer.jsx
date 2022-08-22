@@ -33,7 +33,7 @@ class UsersContainer extends React.Component {
     // });
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     // alert('I know I am updated in the DOM');
   }
 
