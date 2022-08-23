@@ -3,7 +3,7 @@ import classes from './login.module.css';
 import { Formik } from 'formik';
 // import requiredField from '../utilities/validators';
 import { Navigate } from 'react-router-dom';
-import validationSchema from '../utilities/validators/validationSchema';
+import { authValidationsSchema } from '../utilities/validators/validationSchema';
 import { FormControls } from '../common/FormsControls/FormsControls';
 
 /*
@@ -45,7 +45,7 @@ const Login = ({ isAuth, userId, logIn, captcha }) => {
           resetForm();
           setSubmitting(false);
         }}
-        validationSchema={validationSchema(30, 5)}
+        validationSchema={authValidationsSchema(30, 5)}
         // validate={requiredField}
       >
         {({

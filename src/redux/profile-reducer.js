@@ -7,6 +7,7 @@ const SET_STATUS = 'SET_STATUS';
 const UPDATE_STATUS = 'UPDATE_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
+const UPDATE_PROFILE_DATA = 'UPDATE_PROFILE_DATA';
 
 let initialState = {
   postsData: [
@@ -68,6 +69,12 @@ export const profileReducer = (state = initialState, action) => {
         profile: { ...state.profile, photos: action.photos },
       };
 
+    case UPDATE_PROFILE_DATA:
+      return {
+        ...state,
+        profile: { ...action.profile },
+      };
+
     default:
       return state;
   }
@@ -108,6 +115,11 @@ export const savePhotoSuccess = photos => ({
   photos,
 });
 
+export const updateProfileDate = profile => ({
+  type: UPDATE_PROFILE_DATA,
+  profile,
+});
+
 export const getUserProfile = userId => {
   return async dispatch => {
     const response = await profileAPI.getProfile(userId);
@@ -136,6 +148,19 @@ export const savePhoto = photo => {
     const response = await profileAPI.savePhoto(photo);
     if (response.data.resultCode === 0) {
       dispatch(savePhotoSuccess(response.data.data.photos));
+    }
+  };
+};
+
+export const updateProfile = (profile, setStatus) => {
+  return async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+      dispatch(getUserProfile(userId));
+    } else {
+      setStatus(response.data.messages);
+      return Promise.reject(response.data.messages[0]);
     }
   };
 };

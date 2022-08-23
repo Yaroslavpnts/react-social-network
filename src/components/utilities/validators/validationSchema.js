@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const validationsSchema = (maxLength, minLength) => {
+export const authValidationsSchema = (maxLength, minLength) => {
   return yup.object().shape({
     email: yup.string().email("Email isn't valid").required('Required field'),
     password: yup
@@ -12,4 +12,13 @@ const validationsSchema = (maxLength, minLength) => {
   });
 };
 
-export default validationsSchema;
+export const profileDataValidationSchema = contacts => {
+  const schema = {};
+
+  for (let key of Object.keys(contacts)) {
+    schema[key] = yup.string().url().nullable();
+  }
+
+  // return yup.object().shape(schema);
+  return yup.object().shape({ contacts: yup.object().shape(schema) });
+};

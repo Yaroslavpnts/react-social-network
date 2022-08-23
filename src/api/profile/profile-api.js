@@ -20,4 +20,7 @@ export const profileAPI = {
       },
     });
   },
+  saveProfile(profile) {
+    return axiosInstance.put('/profile', profile);
+  },
 };

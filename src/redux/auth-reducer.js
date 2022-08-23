@@ -84,7 +84,6 @@ export const getAuthUserData = () => {
 export const logIn = (data, setStatus) => {
   return async dispatch => {
     const response = await authAPI.logIn(data);
-    console.log(response.data);
     if (response.data.resultCode === STATUS_SUCCESS) {
       dispatch(getAuthUserData());
     } else if (response.data.resultCode === STATUS_CAPTCHA) {

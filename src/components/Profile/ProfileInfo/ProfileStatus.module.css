@@ -1,6 +1,6 @@
-.profileStatus span {
+/* .profileStatus span {
     display: block;
-}
+} */
 
 .profileStatus input {
     display: none;
@@ -12,4 +12,8 @@
 
 .profileStatus input.editMode {
     display: block;
+}
+
+.description {
+    font-weight: bold;
 }
