@@ -34,7 +34,7 @@ const ProfileInfo = ({ profile, status, updateStatus, isOwner, savePhoto, update
             <img src={profile.photos.large || userPhoto} alt="" />
           </div>
 
-          {!isOwner && <input type="file" onChange={onMainPhotoSelected} />}
+          {isOwner && <input type="file" onChange={onMainPhotoSelected} />}
         </div>
         <div className={classes.aboutMe}>
           <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />

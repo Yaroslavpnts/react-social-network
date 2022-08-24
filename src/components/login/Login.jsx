@@ -95,10 +95,13 @@ const Login = ({ isAuth, userId, logIn, captchaUrl }) => {
                 <input
                   type="checkbox"
                   name="rememberMe"
-                  value={values.rememberMe}
+                  // value={values.rememberMe}
+                  checked={values.rememberMe}
                   onChange={handleChange}
                 ></input>{' '}
-                Remember me
+                <div>
+                  <label htmlFor="rememberMe">Remember me</label>
+                </div>
               </div>
               {captchaUrl && (
                 <div className={classes.captchaBlock}>

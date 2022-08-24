@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import classes from './Paginator.module.css';
+import cn from 'classnames';
 
 const Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
   // let pages = [];
@@ -58,7 +59,7 @@ const Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, port
   };
 
   return (
-    <div className={classes.pages}>
+    <div className={cn(classes.pages)}>
       {portionNumber > 1 && (
         <button
           onClick={e => {
@@ -78,7 +79,8 @@ const Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, port
                 onPageChanged(p);
               }}
               key={p}
-              className={currentPage === p ? classes.selectedPage : ''}
+              // className={currentPage === p ? classes.selectedPage : ''}
+              className={cn({ [classes.selectedPage]: currentPage === p })}
             >
               {p}
             </span>
