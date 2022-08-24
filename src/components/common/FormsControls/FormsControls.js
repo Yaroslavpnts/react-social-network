@@ -1,8 +1,8 @@
 import classes from './FormsControls.module.css';
 
 export const FormControls = ({ touched, errors, value }) => {
-  console.log('touched: ', touched);
-  console.log('errors: ', errors);
+  // console.log('touched: ', touched);
+  // console.log('errors: ', errors);
   return touched?.value && errors?.value && <p className={classes.error}>{errors[value]}</p>;
 };
 

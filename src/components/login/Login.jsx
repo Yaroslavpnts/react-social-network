@@ -25,7 +25,7 @@ import { FormControls } from '../common/FormsControls/FormsControls';
   эта функция должна вернуть какой-то jsx
 */
 
-const Login = ({ isAuth, userId, logIn, captcha }) => {
+const Login = ({ isAuth, userId, logIn, captchaUrl }) => {
   if (isAuth) return <Navigate to={`/profile/${userId}`} />;
 
   return (
@@ -36,7 +36,7 @@ const Login = ({ isAuth, userId, logIn, captcha }) => {
           email: '',
           password: '',
           rememberMe: false,
-          captcha: '',
+          captchaUrl: '',
         }}
         // validateOnBlur={true}  - по умолчанию
         // validateOnChange={true} - по умолчанию
@@ -100,20 +100,20 @@ const Login = ({ isAuth, userId, logIn, captcha }) => {
                 ></input>{' '}
                 Remember me
               </div>
-              {captcha && (
+              {captchaUrl && (
                 <div className={classes.captchaBlock}>
                   <div>
                     <input
                       type="text"
-                      name="captcha"
-                      value={values.captcha}
+                      name="captchaUrl"
+                      value={values.captchaUrl}
                       placeholder="captcha"
                       onChange={handleChange}
                       // onBlur={handleBlur}
                     ></input>
                   </div>
                   <div>
-                    <img src={captcha} alt="captcha"></img>
+                    <img src={captchaUrl} alt="captcha"></img>
                   </div>
                 </div>
               )}

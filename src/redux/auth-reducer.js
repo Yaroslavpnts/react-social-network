@@ -1,9 +1,9 @@
-import { authAPI } from '../api/auth/auth-api';
+import { authAPI, securityAPI } from '../api/auth/auth-api';
 import { profileAPI } from '../api/profile/profile-api';
 
 const SET_USER_DATA = 'auth/SET_USER_DATA';
 const SET_CURRENT_USER = 'auth/SET_CURRENT_USER';
-const SHOW_CAPTCHA = 'auth/SHOW_CAPTCHA';
+const GET_CAPTCHA_URL_SUCCESS = 'auth/GET_CAPTCHA_URL_SUCCESS';
 
 const STATUS_SUCCESS = 0;
 // const STATUS_ERROR = 1;
@@ -17,27 +17,17 @@ let initialState = {
   // rememberMe: false,
   // isFetching: false,
   currentUser: null,
-  captcha: '',
+  captchaUrl: '',
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
-      return {
-        ...state,
-        ...action.payload,
-      };
-
+    case GET_CAPTCHA_URL_SUCCESS:
     case SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: action.user,
-      };
-
-    case SHOW_CAPTCHA:
-      return {
-        ...state,
-        captcha: action.url,
+        ...action.payload,
       };
 
     default:
@@ -57,12 +47,16 @@ export const setAuthUserData = (userId, login, email, isAuth) => ({
 
 export const setCurrentUser = user => ({
   type: SET_CURRENT_USER,
-  user,
+  payload: {
+    user,
+  },
 });
 
-export const showCaptcha = url => ({
-  type: SHOW_CAPTCHA,
-  url,
+export const getCaptchaUrlSuccess = captchaUrl => ({
+  type: GET_CAPTCHA_URL_SUCCESS,
+  payload: {
+    captchaUrl,
+  },
 });
 
 export const getAuthUserData = () => {
@@ -83,15 +77,24 @@ export const getAuthUserData = () => {
 
 export const logIn = (data, setStatus) => {
   return async dispatch => {
+    console.log(data);
     const response = await authAPI.logIn(data);
     if (response.data.resultCode === STATUS_SUCCESS) {
       dispatch(getAuthUserData());
     } else if (response.data.resultCode === STATUS_CAPTCHA) {
-      const response = await authAPI.security();
-      dispatch(showCaptcha(response.data.url));
+      // const response = await securityAPI.getCaptchaUrl();
+      // dispatch(getCaptchaUrlSuccess(response.data.url));
+      dispatch(getCaptchaUrl());
     } else {
       setStatus(response.data.messages);
     }
+  };
+};
+
+export const getCaptchaUrl = () => {
+  return async dispatch => {
+    const response = await securityAPI.getCaptchaUrl();
+    dispatch(getCaptchaUrlSuccess(response.data.url));
   };
 };
 

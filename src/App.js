@@ -2,7 +2,7 @@
 import './App.css';
 import React, { Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import UsersContainer from './components/Users/UsersContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/login/LoginContainer';
@@ -56,11 +56,13 @@ class App extends React.Component {
         <div className="app-wrapper-content">
           <Suspense fallback={<Preloader />}>
             <Routes>
+              <Route path="/" element={<Navigate to="/profile" />} />
               <Route path="/dialogs/*" element={<DialogsContainer />} />
               <Route path="/profile/:userId" element={<ProfileContainer />} />
               <Route path="/profile/*" element={<ProfileContainer />} />
               <Route path="/users" element={<UsersContainer />} />
               <Route path="/login" element={<LoginContainer />} />
+              <Route path="*" element={<div>404 NOT FOUND</div>} />
             </Routes>
           </Suspense>
         </div>
